@@ -13,8 +13,9 @@ class Buku extends Model
         'stok',
         'kategori_id',
     ];
-    public function kategori()
+
+    public function relationKategori()
     {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 }

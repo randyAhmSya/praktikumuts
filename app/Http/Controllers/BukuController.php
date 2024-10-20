@@ -12,9 +12,16 @@ class BukuController extends Controller
      */
     public function index()
     {
-        return Buku::with('kategori')->get(); // Mengambil semua buku dengan kategori
+        try {
+            $bukus = Buku::with('relationKategori')->get(); // Mengambil semua buku dengan kategori
+            return response()->json($bukus);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Terjadi kesalahan saat mengambil buku',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -29,8 +36,15 @@ class BukuController extends Controller
             'kategori_id' => 'required|exists:kategoris,id', // Memastikan kategori_id ada di tabel kategoris
         ]);
 
-        $buku = Buku::create($request->all());
-        return response()->json($buku, 201);
+        try {
+            $buku = Buku::create($request->all());
+            return response()->json($buku, 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Terjadi kesalahan saat menyimpan buku',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
 
@@ -102,32 +116,20 @@ class BukuController extends Controller
      */
     public function search(Request $request)
     {
-        // Start query with kategori relationship
-        $query = Buku::query();
+        try {
+            $kategori = $request->input('kategori');
+            $buku = Buku::whereHas('relationKategori', function ($query) use ($kategori) {
+                $query->where('nama_kategori', 'like', '%' . $kategori . '%');
+            })->get();
 
-        // Jika parameter judul ada
-        if ($request->filled('judul')) {
-            $searchTerm = $request->judul;
-            $query->where('judul', 'LIKE', "%{$searchTerm}%");
-        }
-
-        // Include kategori relationship
-        $query->with('kategori');
-
-        // Execute query
-        $books = $query->get();
-
-        // Check if any books were found
-        if ($books->isEmpty()) {
             return response()->json([
-                'message' => 'Buku tidak ditemukan'
-            ], 404);
+                'data' => $buku,
+            ], 202);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Terjadi kesalahan saat mencari buku',
+                'message' => $e->getMessage(),
+            ], 500);
         }
-
-        // Return the results
-        return response()->json([
-            'data' => $books,
-            'total' => $books->count()
-        ], 200);
     }
 }

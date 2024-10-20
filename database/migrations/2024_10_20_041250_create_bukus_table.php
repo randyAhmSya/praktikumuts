@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('penulis');
             $table->decimal('harga', 8, 2);
             $table->integer('stok');
-            $table->foreignId('kategori_id')->constrained('kategoris')->onDelete('cascade');
+            $table->foreignId('kategori_id')->constrained('kategoris');
             $table->timestamps();
         });
     }

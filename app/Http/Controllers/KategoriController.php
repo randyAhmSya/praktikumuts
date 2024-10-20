@@ -9,31 +9,61 @@ class KategoriController extends Controller
 {
     public function index()
     {
-        return Kategori::all(); // Mengambil semua kategori
+        try {
+            $kategoris = Kategori::all();
+            return response()->json($kategoris);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Terjadi kesalahan saat mengambil kategori',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     public function store(Request $request)
     {
         $request->validate(['nama_kategori' => 'required|unique:kategoris,nama_kategori']);
-        $kategori = Kategori::create($request->all());
-        return response()->json($kategori, 201);
+
+        try {
+            $kategori = Kategori::create($request->all());
+            return response()->json($kategori, 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Terjadi kesalahan saat menyimpan kategori',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     public function show($id)
     {
-        return Kategori::find($id); // Menampilkan kategori berdasarkan ID
+        $kategori = Kategori::find($id);
+        if (!$kategori) {
+            return response()->json(['error' => 'Kategori tidak ditemukan'], 404);
+        }
+        return response()->json($kategori);
     }
 
     public function update(Request $request, $id)
     {
         $kategori = Kategori::find($id);
+        if (!$kategori) {
+            return response()->json(['error' => 'Kategori tidak ditemukan'], 404);
+        }
+
+        $request->validate(['nama_kategori' => 'required|unique:kategoris,nama_kategori']);
         $kategori->update($request->all());
         return response()->json($kategori);
     }
 
     public function destroy($id)
     {
-        Kategori::destroy($id);
+        $kategori = Kategori::find($id);
+        if (!$kategori) {
+            return response()->json(['error' => 'Kategori tidak ditemukan'], 404);
+        }
+
+        $kategori->delete();
         return response()->json(['message' => 'Kategori berhasil dihapus']);
     }
 }
