@@ -38,5 +38,14 @@ get data lagi sesudah di tambahkan
 menambahkan bagian bukus
 ![alt text](image-16.png)
 mengupdate bukus
-![alt text](image-17.png)
+![alt text](image-17.png)s
 delete id buku ke 2
+![min100](image-18.png)
+nama buku tidak boleh kosong dan min 1000
+![alt text](image-20.png)
+tidak bisa menambhkanbuku karena angka nya kurang dari 1000
+![alt text](image-21.png)
+tidak bisa menambahkan bku karena tidak ada  nama buku
+![alt text](image-19.png)
+menambahkan filter mencari dengan judul atau id
+

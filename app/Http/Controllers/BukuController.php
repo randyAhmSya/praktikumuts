@@ -62,8 +62,8 @@ class BukuController extends Controller
         $request->validate([
             'judul' => 'string|max:255',
             'penulis' => 'string|max:255',
-            'harga' => 'numeric',
-            'stok' => 'integer',
+            'harga' => 'numeric|',
+            'stok' => 'integer|min:1000',
             'kategori_id' => 'exists:kategoris,id',
         ]);
 
@@ -87,5 +87,47 @@ class BukuController extends Controller
 
         $buku->delete();
         return response()->json(['message' => 'Buku berhasil dihapus']);
+    }
+    /**
+     * Search books by title or category.
+     */
+    /**
+     * Search books by title or category.
+     */
+    /**
+     * Search books by id, title or category.
+     */
+    /**
+     * Search books by title or category.
+     */
+    public function search(Request $request)
+    {
+        // Start query with kategori relationship
+        $query = Buku::query();
+
+        // Jika parameter judul ada
+        if ($request->filled('judul')) {
+            $searchTerm = $request->judul;
+            $query->where('judul', 'LIKE', "%{$searchTerm}%");
+        }
+
+        // Include kategori relationship
+        $query->with('kategori');
+
+        // Execute query
+        $books = $query->get();
+
+        // Check if any books were found
+        if ($books->isEmpty()) {
+            return response()->json([
+                'message' => 'Buku tidak ditemukan'
+            ], 404);
+        }
+
+        // Return the results
+        return response()->json([
+            'data' => $books,
+            'total' => $books->count()
+        ], 200);
     }
 }

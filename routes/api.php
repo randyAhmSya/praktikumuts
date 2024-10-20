@@ -10,3 +10,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 Route::apiResource('kategoris', KategoriController::class);
 Route::apiResource('bukus', BukuController::class);
+// Pastikan route search berada sebelum resource routes
+Route::get('bukus/search', [BukuController::class, 'search']);
+Route::resource('bukus', BukuController::class);
