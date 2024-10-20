@@ -1,2 +1,42 @@
 membuat konfigurasi toko buku dengan api menggunakan laravel
 ![membuat folder](image.png)
+lalu php artisan serve
+![migrate](image-1.png)
+menambah table ke database
+![penghubugn](image-2.png)
+atur penghubung antara database
+![error](image-3.png)
+apabila error ganti collation seperti ini
+![migrate](image-4.png)
+migrate table
+![membuat model](image-5.png)
+membuat model
+![category](image-6.png)
+![buku](image-7.png)
+membuat table buku dan  category
+![alt text](image-8.png)
+membuat controller
+![control](image-9.png)
+buat isi controler
+<h1>penting</h1>
+
+<h3>untuk api nya jangan dibuat manual. buat secara terminal dengan sintak php artisan install:api</h3>
+
+![alt text](image-10.png)
+buat file untuk api dan tambahkan isian seperti itu
+![alt text](image-11.png)
+hasil yang telah benar dibuat
+<h3>get,post,delete pada postman</h3>
+
+![alt text](image-12.png)
+di atas adalah get pada url nya
+![alt text](image-13.png)
+post untuk url
+![alt text](image-14.png)
+get data lagi sesudah di tambahkan
+![alt text](image-15.png)
+menambahkan bagian bukus
+![alt text](image-16.png)
+mengupdate bukus
+![alt text](image-17.png)
+delete id buku ke 2
