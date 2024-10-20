@@ -47,5 +47,13 @@ tidak bisa menambhkanbuku karena angka nya kurang dari 1000
 ![alt text](image-21.png)
 tidak bisa menambahkan bku karena tidak ada  nama buku
 ![alt text](image-19.png)
-menambahkan filter mencari dengan judul atau id
+menambahkan filter mencari dengan judul atau kategori
+![alt text](image-22.png)
+kode menambahkan search untuk memNGGIL BERDASARKAN KATEGORY
+![alt text](image-23.png)
+menambahkan search untuk memnggil berdasarkan kategory
+Performa: Optimalkan query dengan indeks dan paginasi untuk menghindari beban berlebih saat data besar.
+Skalabilitas: Gunakan caching dan load balancer untuk menangani trafik tinggi dan pertumbuhan data.
+Pengalaman Pengguna: Terapkan debounce di frontend, gunakan paginasi, dan tampilkan hasil yang relevan dengan pencarian.
+Keamanan: Validasi input dan terapkan rate limiting untuk mencegah penyalahgunaan.
 link: https://nt9nrhxb-8000.asse.devtunnels.ms/ 
