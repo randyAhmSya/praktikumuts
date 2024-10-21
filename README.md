@@ -56,4 +56,6 @@ Performa: Optimalkan query dengan indeks dan paginasi untuk menghindari beban be
 Skalabilitas: Gunakan caching dan load balancer untuk menangani trafik tinggi dan pertumbuhan data.
 Pengalaman Pengguna: Terapkan debounce di frontend, gunakan paginasi, dan tampilkan hasil yang relevan dengan pencarian.
 Keamanan: Validasi input dan terapkan rate limiting untuk mencegah penyalahgunaan.
-link: https://nt9nrhxb-8000.asse.devtunnels.ms/ 
+link: https://nt9nrhxb-8000.asse.devtunnels.ms/
+![hasil](image-24.png)
+hasil nya menggunakan online menggunakan port pada vscode
